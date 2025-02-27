@@ -1,128 +1,129 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addOrder } from '../../store/slices/Slices/orderSlice';
+import { selectTableById } from '../../store/slices/Tableselector';
+import { reserveTable } from '../../store/slices/Slices/menuSlice';
 import styles from './OrderForm.module.css';
 
-function OrderForm({ tableId }) {
-  const [orderItems, setOrderItems] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState('');
-  const [quantity, setQuantity] = useState(1);
-  
+const ReservaCancha = ({ tableId }) => {
   const dispatch = useDispatch();
-  const menuItems = useSelector(state => state.menu.items);
-  const table = useSelector(state => 
-    state.tables.tables.find(t => t.id === tableId)
-  );
+  const table = useSelector(state => selectTableById(state, tableId));
+  
+  // Estado para almacenar los datos del formulario
+  const [formData, setFormData] = useState({
+    customerName: '',
+    guests: 1,
+    date: '',
+    time: ''
+  });
 
-  const handleAddItem = () => {
-    if (selectedProduct && quantity > 0) {
-      const menuItem = menuItems.find(item => item.id === parseInt(selectedProduct));
-      if (menuItem) {
-        setOrderItems([
-          ...orderItems,
-          {
-            menuItemId: menuItem.id,
-            name: menuItem.name,
-            price: menuItem.price,
-            quantity: parseInt(quantity)
-          }
-        ]);
-        setSelectedProduct('');
-        setQuantity(1);
-      }
-    }
+  // Manejar cambios en los inputs del formulario
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  const handleConfirmOrder = () => {
-    if (orderItems.length > 0 && tableId) {
-      dispatch(addOrder({
-        tableId,
-        items: orderItems
-      }));
-      setOrderItems([]);
-    }
+  // Manejar el envío del formulario
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Evita la recarga de la página
+    if (!tableId) return;
+
+    // Disparar la acción para reservar la mesa
+    dispatch(reserveTable({
+      tableId,
+      ...formData
+    }));
+
+    // Reiniciar el formulario después de la reserva
+    setFormData({
+      customerName: '',
+      guests: 1,
+      date: '',
+      time: ''
+    });
   };
 
+  // Si no hay una mesa seleccionada, mostrar un mensaje
   if (!tableId) {
     return (
       <div className={styles.noTable}>
-        <p>Por favor, seleccione una mesa primero</p>
+        <p>Por favor, seleccione una cancha primero</p>
       </div>
     );
   }
-
+//captura de datos del formulario
   return (
     <div className={styles.container}>
-      <div className={styles.formHeader}>
-        <h2>Nuevo Pedido - {table?.number}</h2>
-      </div>
-
-      <div className={styles.formGroup}>
-        <label className={styles.label}>
-          Producto:
-          <select 
-            value={selectedProduct}
-            onChange={(e) => setSelectedProduct(e.target.value)}
-            className={styles.select}
-          >
-            <option value="">Seleccionar producto</option>
-            {menuItems.map(item => (
-              <option key={item.id} value={item.id}>
-                {item.name} - ${item.price}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-
-      <div className={styles.formGroup}>
-        <label className={styles.label}>
-          Cantidad:
+      <h2 className={styles.title}>Reservar Cancha {table?.number}</h2>
+      <form onSubmit={handleSubmit} className={styles.form}>
+   
+        <div className={styles.formGroup}>
+          <label>Nombre:</label>
           <input
-            type="number"
-            min="1"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            type="text"
+            name="customerName"
+            value={formData.customerName}
+            onChange={handleChange}
+            required
             className={styles.input}
           />
-        </label>
-      </div>
-
-      <button 
-        onClick={handleAddItem}
-        className={styles.addButton}
-        disabled={!selectedProduct}
-      >
-        Agregar al Pedido
-      </button>
-
-      {orderItems.length > 0 && (
-        <div className={styles.orderSummary}>
-          <h3>Resumen del Pedido</h3>
-          <ul className={styles.itemList}>
-            {orderItems.map((item, index) => (
-              <li key={index} className={styles.item}>
-                <span>{item.quantity}x {item.name}</span>
-                <span>${(item.price * item.quantity).toFixed(2)}</span>
-              </li>
-            ))}
-          </ul>
-          <div className={styles.total}>
-            <span>Total:</span>
-            <span>
-              ${orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}
-            </span>
-          </div>
-          <button 
-            onClick={handleConfirmOrder}
-            className={styles.confirmButton}
-          >
-            Confirmar Pedido
-          </button>
         </div>
-      )}
+
+  
+        <div className={styles.formGroup}>
+          <label>Número de personas:</label>
+          <input
+            type="number"
+            name="guests"
+            value={formData.guests}
+            onChange={handleChange}
+            min="1"
+            max={table?.capacity || 1}
+            required
+            className={styles.input}
+          />
+        </div>
+
+   
+        <div className={styles.formGroup}>
+          <label>Fecha:</label>
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            min={new Date().toISOString().split('T')[0]}
+            required
+            className={styles.input}
+          />
+        </div>
+
+     
+        <div className={styles.formGroup}>
+          <label>Hora:</label>
+          <input
+            type="time"
+            name="time"
+            value={formData.time}
+            onChange={handleChange}
+            required
+            className={styles.input}
+          />
+        </div>
+
+    
+        <button 
+          type="submit" 
+          className={styles.submitButton}
+          disabled={!formData.customerName || !formData.date || !formData.time}
+        >
+          Confirmar Reserva
+        </button>
+      </form>
     </div>
   );
-}
+};
 
-export default OrderForm;
+export default ReservaCancha;

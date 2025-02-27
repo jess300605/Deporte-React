@@ -1,54 +1,58 @@
-import React, { useState } from 'react';
-import { Provider } from 'react-redux';
-import { store } from './store/slices/store';
-import TableGrid from './components/Table/table-grid';
-import OrderForm from './components/OrderForm/order-form';
-import ActiveOrders from './components/ActiveOrders/active-orders';
-import styles from './app.module.css';
 
-function App() {
-  const [activeTab, setActiveTab] = useState('tables');
+import { useState } from 'react';
+import { Provider } from 'react-redux';
+import { store } from './store/slices/store'; 
+
+import PlanoDeportivo from './components/Plano/PlanoDeportivo';
+import ReservaCancha from './components/ReservarForm/ReservaCancha';
+import SelectorZona from '../src/SelectorZona/SelectorZona';
+import Resumen from './components/Resumen/Resumen';
+import PlanoDeportivo from './components/Plano/PlanoDeportivo';
+import ReservaCancha from './components/ReservarForm/ReservaCancha';
+
+export default function Home() {
+  // Estado para la zona seleccionada (por defecto "interior")
+  const [selectedZone, setSelectedZone] = useState('interior');
+
+  // Estado para la mesa seleccionada (inicialmente null)
   const [selectedTable, setSelectedTable] = useState(null);
 
-  const handleTableSelect = (tableId) => {
-    setSelectedTable(tableId);
-    setActiveTab('new-order');
-  };
-
   return (
+    // Proveedor de Redux para el estado global
     <Provider store={store}>
-      <div className={styles.container}>
-        <h1 className={styles.title}>Sistema de Gestión de Pedidos</h1>
-        
-        <nav className={styles.navigation}>
-          <button 
-            className={`${styles.navButton} ${activeTab === 'tables' ? styles.active : ''}`}
-            onClick={() => setActiveTab('tables')}
-          >
-            Mesas
-          </button>
-          <button 
-            className={`${styles.navButton} ${activeTab === 'new-order' ? styles.active : ''}`}
-            onClick={() => setActiveTab('new-order')}
-          >
-            Nuevo Pedido
-          </button>
-          <button 
-            className={`${styles.navButton} ${activeTab === 'active-orders' ? styles.active : ''}`}
-            onClick={() => setActiveTab('active-orders')}
-          >
-            Pedidos Activos
-          </button>
-        </nav>
+     
+        <div className="container py-5">
+          <h1 className="text-center mb-4">Sistema de Reservas - Restaurante</h1>
+          
+          <div className="row">
+            {/* Sección de selección de zona y plano del restaurante */}
+            <div className="col-md-8">
+              <div className="card">
+                <div className="card-body">
+                  <SelectorZona 
+                    selectedZone={selectedZone} 
+                    onZoneChange={setSelectedZone} 
+                  />
+                  <PlanoDeportivo 
+                    zone={selectedZone}
+                    onTableSelect={setSelectedTable}
+                  />
+                </div>
+              </div>
+            </div>
 
-        <main className={styles.mainContent}>
-          {activeTab === 'tables' && <TableGrid onTableSelect={handleTableSelect} />}
-          {activeTab === 'new-order' && <OrderForm tableId={selectedTable} />}
-          {activeTab === 'active-orders' && <ActiveOrders />}
-        </main>
-      </div>
+            {/* Sección de formulario de reserva y resumen */}
+            <div className="col-md-4">
+          
+                <ReservaCancha tableId={selectedTable} />
+                <div className="mt-4">
+                  <Resumen tableId={selectedTable} />
+                </div>
+              
+            </div>
+          </div>
+        </div>
+   
     </Provider>
   );
 }
-
-export default App;

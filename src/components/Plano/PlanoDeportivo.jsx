@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { selectTablesByZone } from '../../store/slices/Tableselector';
+import { selectTablesByZone } from '../SelectorZona/Selector';
 import styles from './Plano.module.css';
 
 const PlanoDeportivo = ({ zone, onTableSelect }) => {

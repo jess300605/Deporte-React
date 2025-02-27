@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import tablesReducer from './Slices/tablesSlice';
-import menuReducer from './Slices/menuSlice';
-import ordersReducer from './Slices/orderSlice';
+import tablesReducer from './Slices/tablesSlice.js'; 
+import reservationsReducer from './Slices/reservationsSlice.js'; 
+
 
 export const store = configureStore({
   reducer: {
-    tables: tablesReducer,
-    menu: menuReducer,
-    orders: ordersReducer
+    tables: tablesReducer, // Estado para las mesas
+    reservations: reservationsReducer // Estado para las reservas
   }
 });

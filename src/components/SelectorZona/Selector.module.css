@@ -1,0 +1,128 @@
+.selectorContainer {
+    margin-bottom: 2rem;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .zonesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .zoneCard {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .zoneCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .zoneCard.selected {
+    border-color: #007bff;
+    background-color: #f8f9ff;
+  }
+  
+  .zoneHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .zoneName {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+  }
+  
+  .zoneIcon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+  }
+  
+  .zoneIcon.interior {
+    background-color: #339af0;
+  }
+  
+  .zoneIcon.terraza {
+    background-color: #51cf66;
+  }
+  
+  .zoneIcon.vip {
+    background-color: #ffd43b;
+    color: #000;
+  }
+  
+  .zoneDescription {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0.5rem 0;
+    min-height: 40px;
+  }
+  
+  .zoneFooter {
+    margin-top: 1rem;
+  }
+  
+  .selectButton {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+  }
+  
+  .selectButton:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .selectButton.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+  
+  .selectedZoneInfo {
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #e9ecef;
+    border-radius: 4px;
+  }
+  
+  .selectedZoneInfo p {
+    margin: 0;
+    color: #495057;
+  }
+  
+  @media (max-width: 768px) {
+    .zonesGrid {
+      grid-template-columns: 1fr;
+    }
+  
+    .zoneDescription {
+      min-height: auto;
+    }
+  }

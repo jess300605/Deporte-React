@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectTableById } from '../../store/slices/Tableselector';
-import styles from './ResumenReserva.module.css';
+import { selectTableById } from '../SelectorZona/Selector';
+import styles from './Resumen.module.css';
 //resumen de la reserva
 const ResumenReserva = ({ tableId }) => {
   const table = useSelector(state => selectTableById(state, tableId));
