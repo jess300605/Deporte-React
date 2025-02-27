@@ -1,0 +1,153 @@
+.planoContainer {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .zoneTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .plano {
+    position: relative;
+    min-height: 400px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: white;
+  }
+  
+  .interiorZone,
+  .terrazaZone,
+  .vipZone {
+    height: 100%;
+  }
+  
+  .bar {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .plantas {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .vipLabel {
+    background-color: #ffd700;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .tablesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .table {
+    aspect-ratio: 1;
+    border: 2px solid;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .table:hover:not(.tableReserved) {
+    transform: scale(1.05);
+  }
+  
+  .tableContent {
+    text-align: center;
+  }
+  
+  .tableNumber {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .capacity {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .tableAvailable {
+    background-color: #e7f5ff;
+    border-color: #339af0;
+    color: #1971c2;
+  }
+  
+  .tableReserved {
+    background-color: #ffe3e3;
+    border-color: #fa5252;
+    color: #c92a2a;
+    cursor: not-allowed;
+  }
+  
+  .tableSelected {
+    background-color: #d3f9d8;
+    border-color: #40c057;
+    color: #2b8a3e;
+  }
+  
+  .legend {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .legendItem {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .legendColor {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+  }
+  
+  @media (max-width: 768px) {
+    .tablesGrid {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+      padding: 10px;
+    }
+  
+    .legend {
+      position: static;
+      margin-top: 20px;
+      justify-content: center;
+    }
+  }

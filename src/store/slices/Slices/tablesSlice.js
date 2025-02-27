@@ -4,10 +4,10 @@ const tablesSlice = createSlice({
   name: 'tables',
   initialState: {
     tables: [
-      { id: 1, number: 'Mesa 1', status: 'available' },
-      { id: 2, number: 'Mesa 2', status: 'available' },
-      { id: 3, number: 'Mesa 3', status: 'available' },
-      { id: 4, number: 'Mesa 4', status: 'available' },
+      { id: 1, number: 'Cancha-n1', status: 'available' },
+      { id: 2, number: 'Cancha-n2', status: 'available' },
+      { id: 3, number: 'Cancha-n3', status: 'available' },
+      { id: 4, number: 'Cancha-n4', status: 'available' },
     ]
   },
   reducers: {
@@ -21,5 +21,3 @@ const tablesSlice = createSlice({
   }
 });
 
-export const { updateTableStatus } = tablesSlice.actions;
-export default tablesSlice.reducer;

@@ -1,0 +1,120 @@
+.container {
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .header {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .tableNumber {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .zoneType {
+    background-color: #e9ecef;
+    color: #495057;
+  }
+  
+  .details {
+    padding: 1rem;
+  }
+  
+  .detailItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f1f1f1;
+  }
+  
+  .detailItem:last-child {
+    border-bottom: none;
+  }
+  
+  .label {
+    color: #6c757d;
+    font-weight: 500;
+  }
+  
+  .value {
+    color: #212529;
+  }
+  
+  .footer {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #198754;
+    font-weight: 500;
+  }
+  
+  .statusDot {
+    width: 8px;
+    height: 8px;
+    background-color: #198754;
+    border-radius: 50%;
+  }
+  
+  .noReservation {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .noReservation h3 {
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .noReservation p {
+    color: #6c757d;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .title {
+      font-size: 1.25rem;
+    }
+  
+    .tableNumber {
+      font-size: 1.1rem;
+    }
+  }
